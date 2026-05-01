@@ -6,8 +6,8 @@ A Chrome extension that analyzes job postings against your profile using AI. Cli
 
 ## Download
 
-1. Go to the [Releases](../../releases) page of this repository
-2. Download the latest `job-classifier.zip`
+1. Click the green **Code** button at the top of this page
+2. Select **Download ZIP**
 3. Unzip it to a permanent folder on your computer (e.g. `~/Downloads/job-classifier`)
 
 > Do not delete the folder after installing — Chrome loads the extension directly from it.
@@ -15,7 +15,7 @@ A Chrome extension that analyzes job postings against your profile using AI. Cli
 If you prefer to clone instead:
 
 ```bash
-git clone https://github.com/haseebsaeed/job-classifier.git
+git clone https://github.com/haseebmsaeed/job-classifier.git
 ```
 
 ---
