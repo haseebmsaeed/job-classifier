@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Classifier — Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Job Classifier</h1>
+      <p class="subtitle">Configure your API key and profile to start analyzing job postings.</p>
+    </header>
+
+    <form id="settings-form">
+      <div class="field">
+        <label for="api-key">OpenAI API Key</label>
+        <input
+          type="password"
+          id="api-key"
+          name="apiKey"
+          placeholder="sk-..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <p class="hint">Your key is stored locally in browser storage and never sent anywhere except OpenAI's API.</p>
+      </div>
+
+      <div class="field">
+        <label for="profile">Your Profile</label>
+        <textarea
+          id="profile"
+          name="profile"
+          rows="16"
+          placeholder="Paste your resume, bio, or a list of skills and experience here. The more detail you provide, the better the match analysis will be.
+
+Example:
+- 5 years experience in backend development (Node.js, Python, Go)
+- Frontend: React, TypeScript, Next.js
+- Databases: PostgreSQL, Redis, MongoDB
+- Cloud: AWS (EC2, S3, Lambda, RDS), Docker, Kubernetes
+- Currently a Senior Software Engineer at XYZ Corp
+- Interested in: distributed systems, developer tooling, fintech"
+        ></textarea>
+      </div>
+
+      <div class="actions">
+        <button type="submit" id="save-btn">Save Settings</button>
+        <span id="save-status" class="save-status" aria-live="polite"></span>
+      </div>
+    </form>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
