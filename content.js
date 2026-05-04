@@ -1,7 +1,16 @@
+if (window.__jobClassifierLoaded) {
+  // already injected — nothing to do
+} else {
+
+window.__jobClassifierLoaded = true;
+
 const OVERLAY_ID = "job-classifier-overlay";
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   switch (message.type) {
+    case "PING":
+      sendResponse({});
+      break;
     case "SCRAPE_PAGE":
       sendResponse({ text: scrapePage() });
       break;
@@ -96,7 +105,10 @@ function buildOverlayHTML(state, data) {
 
   if (state === "result") {
     if (!data.isJobPosting) {
-      return `<div class="jc-panel">${header}<div class="jc-body"><p class="jc-not-job">This doesn't look like a job posting.</p></div></div>`;
+      const hint = data.charCount
+        ? `Analyzed ${data.charCount.toLocaleString()} characters — no job description found.`
+        : "No job description found on this page.";
+      return `<div class="jc-panel">${header}<div class="jc-body"><p class="jc-not-job">Not a job posting.</p><p class="jc-not-job-hint">${escHtml(hint)}</p></div></div>`;
     }
 
     const score = Math.max(0, Math.min(100, Math.round(data.matchScore ?? 0)));
@@ -146,3 +158,5 @@ function escHtml(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
+
+} // end __jobClassifierLoaded guard

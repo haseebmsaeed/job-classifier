@@ -184,7 +184,15 @@
 .jc-not-job {
   color: #718096;
   text-align: center;
-  padding: 8px 0;
+  padding: 8px 0 4px;
+  font-weight: 500;
+}
+
+.jc-not-job-hint {
+  color: #a0aec0;
+  font-size: 12px;
+  text-align: center;
+  margin: 0;
 }
 
 /* Needs config */

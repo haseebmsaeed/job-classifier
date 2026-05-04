@@ -11,6 +11,17 @@ chrome.runtime.onMessage.addListener((message) => {
 chrome.action.onClicked.addListener(async (tab) => {
   if (!tab.id) return;
 
+  const url = tab.url ?? "";
+  if (url.startsWith("chrome://") || url.startsWith("chrome-extension://") || url.startsWith("about:")) {
+    return;
+  }
+
+  try {
+    await ensureContentScript(tab.id);
+  } catch {
+    return;
+  }
+
   const { apiKey, profile } = await chrome.storage.sync.get(["apiKey", "profile"]);
 
   if (!apiKey || !profile) {
@@ -25,12 +36,12 @@ chrome.action.onClicked.addListener(async (tab) => {
     const response = await sendToTab(tab.id, { type: "SCRAPE_PAGE" });
     pageText = response?.text;
   } catch {
-    await sendToTab(tab.id, { type: "SHOW_ERROR", message: "Could not scrape page." });
+    await sendToTab(tab.id, { type: "SHOW_ERROR", message: "Could not read page content. Try reloading the tab and clicking the extension again." });
     return;
   }
 
   if (!pageText) {
-    await sendToTab(tab.id, { type: "SHOW_ERROR", message: "No page content found." });
+    await sendToTab(tab.id, { type: "SHOW_ERROR", message: "No readable content found on this page." });
     return;
   }
 
@@ -42,8 +53,17 @@ chrome.action.onClicked.addListener(async (tab) => {
     return;
   }
 
-  await sendToTab(tab.id, { type: "SHOW_RESULT", data: result });
+  await sendToTab(tab.id, { type: "SHOW_RESULT", data: { ...result, charCount: pageText.length } });
 });
+
+async function ensureContentScript(tabId) {
+  try {
+    await sendToTab(tabId, { type: "PING" });
+  } catch {
+    await chrome.scripting.executeScript({ target: { tabId }, files: ["content.js"] });
+    await chrome.scripting.insertCSS({ target: { tabId }, files: ["content.css"] });
+  }
+}
 
 async function classifyWithOpenAI(apiKey, profile, pageText) {
   const truncated = pageText.slice(0, MAX_PAGE_TEXT);
@@ -84,6 +104,8 @@ matchScore is 0-100. matchedSkills and missingSkills list specific technologies/
 
   if (!response.ok) {
     const body = await response.text();
+    if (response.status === 401) throw new Error("Invalid API key. Check your settings.");
+    if (response.status === 429) throw new Error("OpenAI rate limit hit. Wait a moment and try again.");
     throw new Error(`API error ${response.status}: ${body.slice(0, 200)}`);
   }
 
