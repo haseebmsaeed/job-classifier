@@ -219,3 +219,19 @@
 
 /* Error */
 .jc-error-text { color: #e53e3e; }
+
+/* Coffee */
+.jc-coffee {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.jc-coffee-link {
+  font-size: 11px;
+  color: #a0aec0;
+  text-decoration: none;
+}
+
+.jc-coffee-link:hover { color: #667eea; }

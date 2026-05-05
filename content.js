@@ -144,6 +144,9 @@ function buildOverlayHTML(state, data) {
           ${matchedHTML}
           ${missingHTML}
           ${summaryHTML}
+          <div class="jc-coffee">
+            <a href="https://buymeacoffee.com/haseebsaeed" target="_blank" rel="noopener noreferrer" class="jc-coffee-link">☕ Enjoying this? A coffee keeps it running!</a>
+          </div>
         </div>
       </div>`;
   }
