@@ -76,7 +76,7 @@ async function classifyWithOpenAI(apiKey, profile, pageText) {
     },
     body: JSON.stringify({
       model: OPENAI_MODEL,
-      max_tokens: 1024,
+      max_completion_tokens: 1024,
       response_format: { type: "json_object" },
       messages: [
         {
