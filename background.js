@@ -76,7 +76,7 @@ async function classifyWithOpenAI(apiKey, profile, pageText) {
     },
     body: JSON.stringify({
       model: OPENAI_MODEL,
-      max_tokens: 1024,
+      max_completion_tokens: 1024,
       response_format: { type: "json_object" },
       messages: [
         {
@@ -106,7 +106,8 @@ matchScore is 0-100. matchedSkills and missingSkills list specific technologies/
     const body = await response.text();
     if (response.status === 401) throw new Error("Invalid API key. Check your settings.");
     if (response.status === 429) throw new Error("OpenAI rate limit hit. Wait a moment and try again.");
-    throw new Error(`API error ${response.status}: ${body.slice(0, 200)}`);
+    console.error(`API error ${response.status}:`, body);
+    throw new Error("Unable to analyze this page. Please try again in a moment.");
   }
 
   const json = await response.json();
