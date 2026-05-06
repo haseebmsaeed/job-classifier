@@ -32,7 +32,7 @@ git clone https://github.com/haseebmsaeed/job-classifier.git
 
 ## Get an OpenAI API Key
 
-The extension uses OpenAI's `gpt-4o-mini` model to classify jobs. You need an API key to use it.
+The extension uses OpenAI's `gpt-5.4-mini-2026-03-17` model to classify jobs. You need an API key to use it.
 
 1. Go to [platform.openai.com](https://platform.openai.com) and sign in (or create a free account)
 2. Click your profile icon in the top-right → **Your profile** → **User API keys** — or go directly to [platform.openai.com/api-keys](https://platform.openai.com/api-keys)

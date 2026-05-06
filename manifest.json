@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Job Classifier",
+  "name": "AI Job Classifier",
   "version": "1.0.0",
-  "description": "Classify job postings against your profile using Claude AI",
+  "description": "Classify job postings against your profile using OpenAI",
   "permissions": ["activeTab", "storage", "scripting"],
   "host_permissions": ["https://api.openai.com/*"],
   "background": {
