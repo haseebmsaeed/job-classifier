@@ -1,5 +1,5 @@
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
-const OPENAI_MODEL = "gpt-4o-mini";
+const OPENAI_MODEL = "gpt-5.4-mini-2026-03-17";
 const MAX_PAGE_TEXT = 8000;
 
 chrome.runtime.onMessage.addListener((message) => {
