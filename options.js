@@ -14,11 +14,7 @@ form.addEventListener("submit", (e) => {
   const profile = profileInput.value.trim();
 
   chrome.storage.sync.set({ apiKey, profile }, () => {
-    saveStatus.textContent = "Saved!";
+    saveStatus.textContent = "Settings saved. Please close this tab and click the extension on pages containing jobs.";
     saveStatus.classList.add("visible");
-    setTimeout(() => {
-      saveStatus.textContent = "";
-      saveStatus.classList.remove("visible");
-    }, 2000);
   });
 });
